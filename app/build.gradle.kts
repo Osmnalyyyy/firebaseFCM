@@ -45,8 +45,19 @@ android {
 }
 
 dependencies {
+    //firebase
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore")
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:@latest")
+    implementation("com.squareup.retrofit2:converter-gson:@latest")
+
+    //coroutines   multithread işlemler için
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core1.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android.3.7")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
