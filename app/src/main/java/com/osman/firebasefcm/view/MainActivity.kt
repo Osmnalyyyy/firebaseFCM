@@ -8,7 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.osman.firebasefcm.databinding.ActivityMainBinding
+import com.osman.firebasefcm.model.PushNotification
 import com.osman.firebasefcm.ui.theme.FirebaseFCMTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,6 +27,12 @@ class MainActivity : ComponentActivity() {
     }
 
     fun yolla(view: View) {
+
+
+    }
+
+    private fun notificationYolla(notification: PushNotification)=CoroutineScope(Dispatchers.IO).launch{
+
 
 
     }
