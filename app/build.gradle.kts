@@ -51,12 +51,18 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
 
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:@latest")
-    implementation("com.squareup.retrofit2:converter-gson:@latest")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+   // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 
     //coroutines   multithread işlemler için
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core1.3.7")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android.3.7")
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -66,6 +72,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
