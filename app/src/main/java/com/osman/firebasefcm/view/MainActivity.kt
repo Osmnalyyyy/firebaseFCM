@@ -7,6 +7,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
+import com.google.firebase.messaging.FirebaseMessaging
 import com.osman.firebasefcm.databinding.ActivityMainBinding
 import com.osman.firebasefcm.model.NotificationData
 import com.osman.firebasefcm.model.PushNotification
@@ -20,11 +23,25 @@ class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
 
     val topic = "/topics/genelduyurular"
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater) // Burada inflate et
         setContentView(binding.root)
+
+        db = FirebaseFirestore.getInstance()
+
+        //  FirebaseMessaging.getInstance().subscribeToTopic(topic)     bir konuya subscribe olma durumu
+
+        val token = FirebaseMessaging.getInstance().token.addOnSuccessListener {
+
+            val datamap = hashMapOf<String, String>()
+            datamap.put("token", it)
+            datamap.put("kullanici_adi", "isim")
+
+            db.collection("Kullanici").add(datamap).addOnSuccessListener { }
+        }
 
 
     }
