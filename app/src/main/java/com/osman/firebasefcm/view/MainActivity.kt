@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.osman.firebasefcm.databinding.ActivityMainBinding
+import com.osman.firebasefcm.model.NotificationData
 import com.osman.firebasefcm.model.PushNotification
+import com.osman.firebasefcm.service.RetrofitObject
 import com.osman.firebasefcm.ui.theme.FirebaseFCMTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    val topic = "/topics/genelduyurular"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,16 +31,35 @@ class MainActivity : ComponentActivity() {
 
     fun yolla(view: View) {
 
+        val baslik = binding.baslikText.text.toString()
+        val mesaj = binding.mesajText.text.toString()
+
+        if (baslik.isNotBlank() && mesaj.isNotBlank()) {
+            val data = NotificationData(baslik, mesaj)
+            val notification = PushNotification(data, topic)
+            notificationYolla(notification)
+        }
 
     }
 
-    private fun notificationYolla(notification: PushNotification)=CoroutineScope(Dispatchers.IO).launch{
+    private fun notificationYolla(notification: PushNotification) =
+        CoroutineScope(Dispatchers.IO).launch {
 
+            try {
 
+                val cevap = RetrofitObject.api.postNotification(notification)
+                if (cevap.isSuccessful) {
 
-    }
+                } else {
+
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
 }
-
 
 
 @Composable
